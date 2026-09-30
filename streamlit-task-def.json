@@ -1,0 +1,111 @@
+{
+    "compatibilities": [
+        "EC2",
+        "FARGATE",
+        "MANAGED_INSTANCES"
+    ],
+    "containerDefinitions": [
+        {
+            "cpu": 0,
+            "environment": [
+                {
+                    "name": "STREAMLIT_BROWSER_GATHERUSAGESTATS",
+                    "value": "false"
+                },
+                {
+                    "name": "STREAMLIT_SERVER_BASEURLPATH",
+                    "value": "/dashboard"
+                },
+                {
+                    "name": "API_URL",
+                    "value": "http://estatepulse-api.estatepulse-net:8000/predict"
+                },
+                {
+                    "name": "STREAMLIT_SERVER_ADDRESS",
+                    "value": "0.0.0.0"
+                },
+                {
+                    "name": "STREAMLIT_SERVER_PORT",
+                    "value": "8501"
+                }
+            ],
+            "environmentFiles": [],
+            "essential": true,
+            "image": "<AWS_ACCOUNT_ID>.dkr.ecr.us-east-1.amazonaws.com/estatepulse-ui:latest",
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-group": "/ecs/estatepulse-ui",
+                    "awslogs-create-group": "true",
+                    "awslogs-region": "us-east-1",
+                    "awslogs-stream-prefix": "ecs"
+                },
+                "secretOptions": []
+            },
+            "mountPoints": [],
+            "name": "estatepulse-ui",
+            "portMappings": [
+                {
+                    "appProtocol": "http",
+                    "containerPort": 8501,
+                    "hostPort": 8501,
+                    "name": "estatepulse-ui-8501-tcp",
+                    "protocol": "tcp"
+                }
+            ],
+            "systemControls": [],
+            "ulimits": [],
+            "volumesFrom": []
+        }
+    ],
+    "cpu": "512",
+    "enableFaultInjection": false,
+    "executionRoleArn": "arn:aws:iam::<AWS_ACCOUNT_ID>:role/ecsTaskExecutionRole",
+    "family": "estatepulse-ui",
+    "memory": "2048",
+    "networkMode": "awsvpc",
+    "placementConstraints": [],
+    "registeredAt": "2026-09-30T00:00:00.000Z",
+    "requiresAttributes": [
+        {
+            "name": "com.amazonaws.ecs.capability.logging-driver.awslogs"
+        },
+        {
+            "name": "ecs.capability.execution-role-awslogs"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.ecr-auth"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.task-iam-role"
+        },
+        {
+            "name": "ecs.capability.execution-role-ecr-pull"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.18"
+        },
+        {
+            "name": "ecs.capability.task-eni"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.29"
+        }
+    ],
+    "requiresCompatibilities": [
+        "FARGATE"
+    ],
+    "revision": 1,
+    "runtimePlatform": {
+        "cpuArchitecture": "X86_64",
+        "operatingSystemFamily": "LINUX"
+    },
+    "status": "ACTIVE",
+    "taskDefinitionArn": "arn:aws:ecs:us-east-1:<AWS_ACCOUNT_ID>:task-definition/estatepulse-ui:1",
+    "taskRoleArn": "arn:aws:iam::<AWS_ACCOUNT_ID>:role/ecs_s3_access",
+    "volumes": [],
+    "tags": []
+}

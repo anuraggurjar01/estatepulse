@@ -1,0 +1,99 @@
+{
+    "compatibilities": [
+        "EC2",
+        "MANAGED_INSTANCES",
+        "FARGATE"
+    ],
+    "containerDefinitions": [
+        {
+            "cpu": 0,
+            "environment": [
+                {
+                    "name": "AWS_DEFAULT_REGION",
+                    "value": "us-east-1"
+                },
+                {
+                    "name": "S3_BUCKET",
+                    "value": "estatepulse-ml-data"
+                }
+            ],
+            "environmentFiles": [],
+            "essential": true,
+            "image": "<AWS_ACCOUNT_ID>.dkr.ecr.us-east-1.amazonaws.com/estatepulse-api:latest",
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-group": "/ecs/estatepulse-api",
+                    "awslogs-create-group": "true",
+                    "awslogs-region": "us-east-1",
+                    "awslogs-stream-prefix": "ecs"
+                },
+                "secretOptions": []
+            },
+            "mountPoints": [],
+            "name": "estatepulse-api",
+            "portMappings": [
+                {
+                    "appProtocol": "http",
+                    "containerPort": 8000,
+                    "hostPort": 8000,
+                    "name": "estatepulse-api-8000-tcp",
+                    "protocol": "tcp"
+                }
+            ],
+            "systemControls": [],
+            "ulimits": [],
+            "volumesFrom": []
+        }
+    ],
+    "cpu": "512",
+    "enableFaultInjection": false,
+    "executionRoleArn": "arn:aws:iam::<AWS_ACCOUNT_ID>:role/ecsTaskExecutionRole",
+    "family": "estatepulse-api",
+    "memory": "2048",
+    "networkMode": "awsvpc",
+    "placementConstraints": [],
+    "registeredAt": "2026-09-30T00:00:00.000Z",
+    "requiresAttributes": [
+        {
+            "name": "com.amazonaws.ecs.capability.logging-driver.awslogs"
+        },
+        {
+            "name": "ecs.capability.execution-role-awslogs"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.ecr-auth"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.task-iam-role"
+        },
+        {
+            "name": "ecs.capability.execution-role-ecr-pull"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.18"
+        },
+        {
+            "name": "ecs.capability.task-eni"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.29"
+        }
+    ],
+    "requiresCompatibilities": [
+        "FARGATE"
+    ],
+    "revision": 1,
+    "runtimePlatform": {
+        "cpuArchitecture": "X86_64",
+        "operatingSystemFamily": "LINUX"
+    },
+    "status": "ACTIVE",
+    "taskDefinitionArn": "arn:aws:ecs:us-east-1:<AWS_ACCOUNT_ID>:task-definition/estatepulse-api:1",
+    "taskRoleArn": "arn:aws:iam::<AWS_ACCOUNT_ID>:role/ecs_s3_access",
+    "volumes": [],
+    "tags": []
+}
